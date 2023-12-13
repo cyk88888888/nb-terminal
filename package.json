@@ -2,12 +2,13 @@
   "name": "nb-terminal",
   "version": "1.0.0",
   "description": "自定义nodejs终端",
-  "main": "./bin/index.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node ./bin/index"
+    "start": "tsc --watch",
+    "build": "tsc"
   },
   "bin": {
-    "nb": "./bin/index.js"
+    "nb": "./index.js"
   },
   "keywords": [],
   "author": "",
