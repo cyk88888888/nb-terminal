@@ -1,3 +1,8 @@
+/*
+ * @Descripttion: 命令行主入口
+ * @Author: CYK
+ * @Date: 2023-12-14 09:52:14
+ */
 import { Command } from "commander"
 import { Express } from "./module/Express"
 const program = new Command()
@@ -14,17 +19,17 @@ program
     })
 
 program
-    .command("http")
+    .command("http <dirUrl>")
     .description("开启一个http服务器")
-    .action(() => {
-        new Express().http();
+    .action((dirUrl: string) => {
+        new Express(dirUrl);
     })
 
 program
-    .command("https")
+    .command("https <dirUrl>")
     .description("开启一个https服务器")
-    .action(() => {
-        new Express().https();
+    .action((dirUrl: string) => {
+        new Express(dirUrl, true);
     })
 
 //不存在命令行内容时调用
@@ -32,4 +37,4 @@ program.on('command:*', function () {
     console.log('Invalid command: %s\nSee --help for a list of available commands.', program.args.join(' '));
 });
 
-program.parse()
+program.parse(process.argv)

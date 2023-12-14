@@ -17,20 +17,14 @@ const os_1 = __importDefault(require("os"));
  * @date 2023-12-14 09:52:14
  */
 class Express {
-    constructor() {
+    constructor(dirUrl, isHttps) {
         let self = this;
         self.app = (0, express_1.default)();
-        let httpUrl = "";
-        self.app.use(express_1.default.static(path_1.default.join(process_1.default.cwd(), 'public')));
+        let httpUrl = path_1.default.join(process_1.default.cwd(), dirUrl || '');
+        console.log('http%s服务器的作用目录路径: %s', isHttps ? "s" : '', httpUrl);
+        self.app.use(express_1.default.static(httpUrl));
         self.port = 3000;
-    }
-    /** 启动一个http服务器*/
-    http() {
-        this.createServer(this.port);
-    }
-    /** 启动一个https服务器*/
-    https() {
-        this.createServer(this.port, true);
+        this.createServer(this.port, isHttps);
     }
     createServer(port, isHttps) {
         let self = this;

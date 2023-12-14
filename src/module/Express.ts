@@ -14,22 +14,14 @@ export class Express {
     private app: any;
     private port: number;
     private server;
-    constructor() {
+    constructor(dirUrl: string, isHttps?: boolean) {
         let self = this;
         self.app = express();
-        let httpUrl = "";
-        self.app.use(express.static(path.join(process.cwd(), 'public')));
+        let httpUrl = path.join(process.cwd(), dirUrl || '');
+        console.log('http%s服务器的作用目录路径: %s', isHttps ? "s" : '', httpUrl);
+        self.app.use(express.static(httpUrl));
         self.port = 3000;
-    }
-
-    /** 启动一个http服务器*/
-    public http() {
-        this.createServer(this.port);
-    }
-
-    /** 启动一个https服务器*/
-    public https() {
-        this.createServer(this.port, true);
+        this.createServer(this.port, isHttps);
     }
 
     private createServer(port: number, isHttps?: boolean) {
