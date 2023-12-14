@@ -7,11 +7,18 @@ Object.defineProperty(exports, "__esModule", { value: true });
  */
 const commander_1 = require("commander");
 const Express_1 = require("./module/Express");
+const Test_1 = require("./module/Test");
 const program = new commander_1.Command();
 program
     .name("nb")
     .description("TypeScript开发的nodejs终端命令行工具")
     .version("1.0.0");
+//测试脚本
+program.command('test')
+    .description('测试脚本')
+    .action(() => {
+    new Test_1.Test();
+});
 program
     .command("http <dirUrl>")
     .description("开启一个http服务器")
