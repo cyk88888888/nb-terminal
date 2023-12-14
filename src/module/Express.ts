@@ -1,8 +1,3 @@
-/*
- * @Descripttion: 说明
- * @Author: CYK
- * @Date: 2023-12-14 09:52:14
- */
 import express from 'express';
 import process from 'process';
 import path from 'path';
