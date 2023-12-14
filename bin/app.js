@@ -13,12 +13,6 @@ program
     .description("TypeScript开发的nodejs终端命令行工具")
     .version("1.0.0");
 program
-    .command("init <name>")
-    .description("初始化一个工程")
-    .action((name) => {
-    console.log("start init zhi project:", name);
-});
-program
     .command("http <dirUrl>")
     .description("开启一个http服务器")
     .action((dirUrl) => {
