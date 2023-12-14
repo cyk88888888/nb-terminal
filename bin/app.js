@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-/*
+/**
  * @Descripttion: 命令行主入口
  * @Author: CYK
  * @Date: 2023-12-14 09:52:14
