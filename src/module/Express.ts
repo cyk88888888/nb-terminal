@@ -1,3 +1,8 @@
+/*
+ * @Descripttion: 说明
+ * @Author: CYK
+ * @Date: 2023-12-14 09:52:14
+ */
 import express from 'express';
 import process from 'process';
 import path from 'path';
@@ -5,6 +10,7 @@ import http from 'http';
 import https from 'https';
 import fs from 'fs';
 import os from 'os';
+import { AddressInfo } from 'net';
 /*
  * @descripttion express框架启动http || https
  * @author cyk
@@ -13,7 +19,7 @@ import os from 'os';
 export class Express {
     private app: any;
     private port: number;
-    private server;
+    private server: http.Server|https.Server;
     constructor(dirUrl: string, isHttps?: boolean) {
         let self = this;
         self.app = express();
@@ -38,7 +44,7 @@ export class Express {
         }
 
         self.server.listen(port);
-        self.server.on('error', (error) => {
+        self.server.on('error', (error: any) => {
             if (error.syscall !== 'listen') {
                 throw error;
             }
@@ -59,7 +65,7 @@ export class Express {
             }
         });
         self.server.on('listening', () => {
-            let addr = self.server.address();
+            let addr = self.server.address() as AddressInfo;
             let ip = self.getIp();
             console.log(`server running at http${isHttps ? 's' : ''}://${ip}:${addr.port}`);
         });
