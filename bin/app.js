@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const commander_1 = require("commander");
+const Express_1 = require("./module/Express");
 const program = new commander_1.Command();
 program
     .name("nb")
@@ -16,13 +17,13 @@ program
     .command("http")
     .description("开启一个http服务器")
     .action(() => {
-    console.log("http服务器已开启");
+    new Express_1.Express().http();
 });
 program
     .command("https")
     .description("开启一个https服务器")
     .action(() => {
-    console.log("https服务器已开启");
+    new Express_1.Express().https();
 });
 //不存在命令行内容时调用
 program.on('command:*', function () {

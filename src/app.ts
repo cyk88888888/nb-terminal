@@ -1,4 +1,5 @@
 import { Command } from "commander"
+import { Express } from "./module/Express"
 const program = new Command()
 program
     .name("nb")
@@ -16,14 +17,14 @@ program
     .command("http")
     .description("开启一个http服务器")
     .action(() => {
-        console.log("http服务器已开启")
+        new Express().http();
     })
 
 program
     .command("https")
     .description("开启一个https服务器")
     .action(() => {
-        console.log("https服务器已开启")
+        new Express().https();
     })
 
 //不存在命令行内容时调用
