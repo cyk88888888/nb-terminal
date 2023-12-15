@@ -1,2 +1,2 @@
 # nb-terminal
-自定义nodejs终端
+基于typescript实现的自定义nodejs终端命令行工具
