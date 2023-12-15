@@ -1,7 +1,7 @@
 /** 
- * @Descripttion: 命令行主入口
- * @Author: CYK
- * @Date: 2023-12-14 09:52:14
+ * @descripttion 命令行主入口
+ * @author CYK
+ * @date 2023-12-14 09:52:14
  */
 import { Command } from "commander"
 import { Express } from "./module/Express"

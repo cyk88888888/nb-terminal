@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 /**
- * @Descripttion: 命令行主入口
- * @Author: CYK
- * @Date: 2023-12-14 09:52:14
+ * @descripttion 命令行主入口
+ * @author CYK
+ * @date 2023-12-14 09:52:14
  */
 const commander_1 = require("commander");
 const Express_1 = require("./module/Express");
