@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * @descripttion 命令行主入口
- * @author CYK
+ * @author cyk
  * @date 2023-12-14 09:52:14
  */
 const commander_1 = require("commander");
