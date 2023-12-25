@@ -31,11 +31,16 @@ class Test {
         console.log('Hi!');
     }
     test2() {
-        TimeUT_1.TimeUT.consoleStartCli('pull');
-        let cli = 'git pull';
-        (0, child_process_1.exec)(cli, { cwd: process.cwd(), encoding: 'utf8' }, () => {
-            console.log(process.cwd());
-            TimeUT_1.TimeUT.consoleEndCli('pull');
+        TimeUT_1.TimeUT.consoleStartCli('push');
+        let cli = 'git add .';
+        (0, child_process_1.exec)(cli, { cwd: process.cwd(), encoding: 'utf-8' }, () => {
+            cli = 'git commit -m "测试提交"';
+            (0, child_process_1.exec)(cli, { cwd: process.cwd(), encoding: 'utf-8' }, () => {
+                cli = 'git push';
+                (0, child_process_1.exec)(cli, { cwd: process.cwd(), encoding: 'utf-8' }, () => {
+                    TimeUT_1.TimeUT.consoleEndCli('push');
+                });
+            });
         });
     }
 }

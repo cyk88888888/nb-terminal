@@ -7,38 +7,43 @@ import { UT } from "./lib/UT";
  * @author cyk
  * @date 2023-12-14 20:00:14
  */
-export class Test{
-    constructor(){
+export class Test {
+    constructor() {
         // this.test();
         // this.test1();
         this.test2();
     }
 
-    private test(){
+    private test() {
         TimeUT.consoleStartCli('test');
         UT.logRed("哈哈哈哈");
         TimeUT.consoleEndCli('test');
     }
 
-    private test1(){
-        let promise = new Promise(function(resolve, reject) {
+    private test1() {
+        let promise = new Promise(function (resolve, reject) {
             console.log('Promise');
             resolve('resolved.');
-          });
-          
-          promise.then((value: any) => {
+        });
+
+        promise.then((value: any) => {
             console.log(value);
-          });
-          
-          console.log('Hi!');
+        });
+
+        console.log('Hi!');
     }
 
-    private test2(){
-        TimeUT.consoleStartCli('pull');
-        let cli = 'git pull';
-        exec(cli, {cwd: process.cwd(), encoding: 'utf8' },()=>{
-            console.log(process.cwd())
-            TimeUT.consoleEndCli('pull');
+    private test2() {
+        TimeUT.consoleStartCli('push');
+        let cli = 'git add .';
+        exec(cli, { cwd: process.cwd(), encoding: 'utf-8' }, () => {
+            cli = 'git commit -m "测试提交"';
+            exec(cli, { cwd: process.cwd(), encoding: 'utf-8' }, () => {
+                cli = 'git push';
+                exec(cli, { cwd: process.cwd(), encoding: 'utf-8' }, () => {
+                    TimeUT.consoleEndCli('push');
+                });
+            });
         });
     }
 
