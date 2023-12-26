@@ -43,7 +43,7 @@ export class Test {
                         UT.logRed('stderr:' + stderr);
                         reject();
                     } else {
-                        console.log('stdout: ' + stdout);
+                        console.log(stdout);
                         resolve('');
                     }
                     // console.log('git pull');
@@ -51,50 +51,56 @@ export class Test {
             });
         } 
 
-        let promise_add = new Promise<string>(function (resolve, reject) {
-            exec('git add .', { cwd: process.cwd(), encoding: 'utf8' }, (err: ExecException, stdout: string, stderr: string) => {
-                if (err) {
-                    UT.logRed(err);
-                    UT.logRed('stderr:' + stderr);
-                    reject();
-                } else {
-                    console.log(stdout);
-                    resolve('');
-                }
-                // console.log('git add .');
+        async function promise_add(){
+            return new Promise<string>(function (resolve, reject) {
+                exec('git add .', { cwd: process.cwd(), encoding: 'utf8' }, (err: ExecException, stdout: string, stderr: string) => {
+                    if (err) {
+                        UT.logRed(err);
+                        UT.logRed('stderr:' + stderr);
+                        reject();
+                    } else {
+                        console.log(stdout);
+                        resolve('');
+                    }
+                    // console.log('git add .');
+                });
             });
-        });
+        }
 
-        let promise_commit = new Promise<string>(function (resolve, reject) {
-            exec('git commit -m "提交代码"', { cwd: process.cwd(), encoding: 'utf8' }, (err: ExecException, stdout: string, stderr: string) => {
-                if (err) {
-                    UT.logRed(err);
-                    UT.logRed('stderr:' + stderr);
-                    reject();
-                } else {
-                    console.log(stdout);
-                    resolve('');
-                }
+        async function promise_commit(){
+            return new Promise<string>(function (resolve, reject) {
+                exec('git commit -m "提交代码"', { cwd: process.cwd(), encoding: 'utf8' }, (err: ExecException, stdout: string, stderr: string) => {
+                    if (err) {
+                        UT.logRed(err);
+                        UT.logRed('stderr:' + stderr);
+                        reject();
+                    } else {
+                        console.log(stdout);
+                        resolve('');
+                    }
+                });
             });
-        });
+        }
 
-        let promise_push = new Promise<string>(function (resolve, reject) {
-            exec('git push', { cwd: process.cwd(), encoding: 'utf8' }, (err: ExecException, stdout: string, stderr: string) => {
-                if (err) {
-                    UT.logRed(err);
-                    UT.logRed('stderr:' + stderr);
-                    reject();
-                } else {
-                    console.log(stdout);
-                    resolve('');
-                }
-                // console.log('git push');
+        async function promise_push(){
+            return new Promise<string>(function (resolve, reject) {
+                exec('git push', { cwd: process.cwd(), encoding: 'utf8' }, (err: ExecException, stdout: string, stderr: string) => {
+                    if (err) {
+                        UT.logRed(err);
+                        UT.logRed('stderr:' + stderr);
+                        reject();
+                    } else {
+                        console.log(stdout);
+                        resolve('');
+                    }
+                });
             });
-        });
+        }
+
         await promise_pull();
-        // await promise_add;
-        // await promise_commit;
-        // await promise_push;
+        await promise_add();
+        await promise_commit();
+        await promise_push();
 
         TimeUT.consoleEndCli('push');
     }

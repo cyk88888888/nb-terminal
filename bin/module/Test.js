@@ -41,58 +41,63 @@ class Test {
                         reject();
                     }
                     else {
-                        console.log('stdout: ' + stdout);
+                        console.log(stdout);
                         resolve('');
                     }
                     // console.log('git pull');
                 });
             });
         }
-        let promise_add = new Promise(function (resolve, reject) {
-            (0, child_process_1.exec)('git add .', { cwd: process.cwd(), encoding: 'utf8' }, (err, stdout, stderr) => {
-                if (err) {
-                    UT_1.UT.logRed(err);
-                    UT_1.UT.logRed('stderr:' + stderr);
-                    reject();
-                }
-                else {
-                    console.log(stdout);
-                    resolve('');
-                }
-                // console.log('git add .');
+        async function promise_add() {
+            return new Promise(function (resolve, reject) {
+                (0, child_process_1.exec)('git add .', { cwd: process.cwd(), encoding: 'utf8' }, (err, stdout, stderr) => {
+                    if (err) {
+                        UT_1.UT.logRed(err);
+                        UT_1.UT.logRed('stderr:' + stderr);
+                        reject();
+                    }
+                    else {
+                        console.log(stdout);
+                        resolve('');
+                    }
+                    // console.log('git add .');
+                });
             });
-        });
-        let promise_commit = new Promise(function (resolve, reject) {
-            (0, child_process_1.exec)('git commit -m "提交代码"', { cwd: process.cwd(), encoding: 'utf8' }, (err, stdout, stderr) => {
-                if (err) {
-                    UT_1.UT.logRed(err);
-                    UT_1.UT.logRed('stderr:' + stderr);
-                    reject();
-                }
-                else {
-                    console.log(stdout);
-                    resolve('');
-                }
+        }
+        async function promise_commit() {
+            return new Promise(function (resolve, reject) {
+                (0, child_process_1.exec)('git commit -m "提交代码"', { cwd: process.cwd(), encoding: 'utf8' }, (err, stdout, stderr) => {
+                    if (err) {
+                        UT_1.UT.logRed(err);
+                        UT_1.UT.logRed('stderr:' + stderr);
+                        reject();
+                    }
+                    else {
+                        console.log(stdout);
+                        resolve('');
+                    }
+                });
             });
-        });
-        let promise_push = new Promise(function (resolve, reject) {
-            (0, child_process_1.exec)('git push', { cwd: process.cwd(), encoding: 'utf8' }, (err, stdout, stderr) => {
-                if (err) {
-                    UT_1.UT.logRed(err);
-                    UT_1.UT.logRed('stderr:' + stderr);
-                    reject();
-                }
-                else {
-                    console.log(stdout);
-                    resolve('');
-                }
-                // console.log('git push');
+        }
+        async function promise_push() {
+            return new Promise(function (resolve, reject) {
+                (0, child_process_1.exec)('git push', { cwd: process.cwd(), encoding: 'utf8' }, (err, stdout, stderr) => {
+                    if (err) {
+                        UT_1.UT.logRed(err);
+                        UT_1.UT.logRed('stderr:' + stderr);
+                        reject();
+                    }
+                    else {
+                        console.log(stdout);
+                        resolve('');
+                    }
+                });
             });
-        });
+        }
         await promise_pull();
-        // await promise_add;
-        // await promise_commit;
-        // await promise_push;
+        await promise_add();
+        await promise_commit();
+        await promise_push();
         TimeUT_1.TimeUT.consoleEndCli('push');
     }
 }
