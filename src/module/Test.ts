@@ -35,17 +35,6 @@ export class Test {
 
     private async test2() {
         TimeUT.consoleStartCli('push');
-        // let cli = 'git add .';
-        // exec(cli, { cwd: process.cwd(), encoding: 'utf8' }, () => {
-        //     cli = 'git commit -m "测试提交"';
-        //     exec(cli, { cwd: process.cwd(), encoding: 'utf8' }, () => {
-        //         cli = 'git push';
-        //         exec(cli, { cwd: process.cwd(), encoding: 'utf8' }, () => {
-        //             TimeUT.consoleEndCli('push');
-        //         });
-        //     });
-        // });
-
         async function promise_pull(){
             return new Promise<string>(function (resolve, reject) {
                 exec('git pull', { cwd: process.cwd(), encoding: 'utf8' }, (err: ExecException, stdout: string, stderr: string) => {
