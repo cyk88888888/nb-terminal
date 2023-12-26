@@ -46,7 +46,6 @@ export class Test {
                         console.log(stdout);
                         resolve('');
                     }
-                    // console.log('git pull');
                 });
             });
         } 
@@ -62,7 +61,6 @@ export class Test {
                         console.log(stdout);
                         resolve('');
                     }
-                    // console.log('git add .');
                 });
             });
         }
