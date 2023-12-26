@@ -30,7 +30,7 @@ class Test {
         });
         console.log('Hi!');
     }
-    test2() {
+    async test2() {
         TimeUT_1.TimeUT.consoleStartCli('push');
         // let cli = 'git add .';
         // exec(cli, { cwd: process.cwd(), encoding: 'utf8' }, () => {
@@ -42,21 +42,22 @@ class Test {
         //         });
         //     });
         // });
-        let ps = [];
-        let promise_pull = new Promise(function (resolve, reject) {
-            (0, child_process_1.exec)('git pull', { cwd: process.cwd(), encoding: 'utf8' }, (err, stdout, stderr) => {
-                if (err) {
-                    UT_1.UT.logRed(err);
-                    UT_1.UT.logRed('stderr:' + stderr);
-                    reject();
-                }
-                else {
-                    console.log(stdout);
-                    resolve('');
-                }
-                // console.log('git pull');
+        function promise_pull() {
+            return new Promise(function (resolve, reject) {
+                (0, child_process_1.exec)('git pull', { cwd: process.cwd(), encoding: 'utf8' }, (err, stdout, stderr) => {
+                    if (err) {
+                        UT_1.UT.logRed(err);
+                        UT_1.UT.logRed('stderr:' + stderr);
+                        reject();
+                    }
+                    else {
+                        console.log(stdout);
+                        resolve('');
+                    }
+                    // console.log('git pull');
+                });
             });
-        });
+        }
         let promise_add = new Promise(function (resolve, reject) {
             (0, child_process_1.exec)('git add .', { cwd: process.cwd(), encoding: 'utf8' }, (err, stdout, stderr) => {
                 if (err) {
@@ -98,10 +99,11 @@ class Test {
                 // console.log('git push');
             });
         });
-        ps.push(promise_pull, promise_add, promise_commit, promise_push);
-        Promise.all(ps).then(() => {
-            TimeUT_1.TimeUT.consoleEndCli('push');
-        });
+        await promise_pull();
+        // await promise_add;
+        // await promise_commit;
+        // await promise_push;
+        TimeUT_1.TimeUT.consoleEndCli('push');
     }
 }
 exports.Test = Test;

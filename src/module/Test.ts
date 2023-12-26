@@ -33,7 +33,7 @@ export class Test {
         console.log('Hi!');
     }
 
-    private test2() {
+    private async test2() {
         TimeUT.consoleStartCli('push');
         // let cli = 'git add .';
         // exec(cli, { cwd: process.cwd(), encoding: 'utf8' }, () => {
@@ -46,22 +46,23 @@ export class Test {
         //     });
         // });
 
-        let ps: Promise<any>[] = [];
-        let promise_pull = new Promise(function (resolve, reject) {
-            exec('git pull', { cwd: process.cwd(), encoding: 'utf8' }, (err: ExecException, stdout: string, stderr: string) => {
-                if (err) {
-                    UT.logRed(err);
-                    UT.logRed('stderr:' + stderr);
-                    reject();
-                } else {
-                    console.log(stdout);
-                    resolve('');
-                }
-                // console.log('git pull');
+        function promise_pull(){
+            return new Promise<string>(function (resolve, reject) {
+                exec('git pull', { cwd: process.cwd(), encoding: 'utf8' }, (err: ExecException, stdout: string, stderr: string) => {
+                    if (err) {
+                        UT.logRed(err);
+                        UT.logRed('stderr:' + stderr);
+                        reject();
+                    } else {
+                        console.log(stdout);
+                        resolve('');
+                    }
+                    // console.log('git pull');
+                });
             });
-        });
+        } 
 
-        let promise_add = new Promise(function (resolve, reject) {
+        let promise_add = new Promise<string>(function (resolve, reject) {
             exec('git add .', { cwd: process.cwd(), encoding: 'utf8' }, (err: ExecException, stdout: string, stderr: string) => {
                 if (err) {
                     UT.logRed(err);
@@ -75,7 +76,7 @@ export class Test {
             });
         });
 
-        let promise_commit = new Promise(function (resolve, reject) {
+        let promise_commit = new Promise<string>(function (resolve, reject) {
             exec('git commit -m "提交代码"', { cwd: process.cwd(), encoding: 'utf8' }, (err: ExecException, stdout: string, stderr: string) => {
                 if (err) {
                     UT.logRed(err);
@@ -88,7 +89,7 @@ export class Test {
             });
         });
 
-        let promise_push = new Promise(function (resolve, reject) {
+        let promise_push = new Promise<string>(function (resolve, reject) {
             exec('git push', { cwd: process.cwd(), encoding: 'utf8' }, (err: ExecException, stdout: string, stderr: string) => {
                 if (err) {
                     UT.logRed(err);
@@ -101,10 +102,12 @@ export class Test {
                 // console.log('git push');
             });
         });
-        ps.push(promise_pull, promise_add, promise_commit, promise_push);
-        Promise.all(ps).then(() => {
-            TimeUT.consoleEndCli('push');
-        });
+        await promise_pull();
+        // await promise_add;
+        // await promise_commit;
+        // await promise_push;
+
+        TimeUT.consoleEndCli('push');
     }
 
 }
