@@ -54,7 +54,7 @@ export class Test {
                         UT.logRed('stderr:' + stderr);
                         reject();
                     } else {
-                        console.log(stdout);
+                        console.log('stdout: ' + stdout);
                         resolve('');
                     }
                     // console.log('git pull');
