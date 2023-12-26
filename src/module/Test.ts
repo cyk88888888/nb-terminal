@@ -46,7 +46,7 @@ export class Test {
         //     });
         // });
 
-        function promise_pull(){
+        async function promise_pull(){
             return new Promise<string>(function (resolve, reject) {
                 exec('git pull', { cwd: process.cwd(), encoding: 'utf8' }, (err: ExecException, stdout: string, stderr: string) => {
                     if (err) {

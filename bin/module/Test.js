@@ -42,7 +42,7 @@ class Test {
         //         });
         //     });
         // });
-        function promise_pull() {
+        async function promise_pull() {
             return new Promise(function (resolve, reject) {
                 (0, child_process_1.exec)('git pull', { cwd: process.cwd(), encoding: 'utf8' }, (err, stdout, stderr) => {
                     if (err) {
