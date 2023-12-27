@@ -47,9 +47,10 @@ var TimeUT;
         logwithTimeStr(UT_1.UT.formatStr('命令【%s】执行完毕, 共耗时%s秒!', cli, getDateDiff(stDate, curDate()) + ''));
     }
     TimeUT.consoleEndCli = consoleEndCli;
-    const logwithTimeStr = (msg) => {
+    function logwithTimeStr(msg) {
         console.log("%s: %s", getCurTimeStr(), msg);
-    };
+    }
+    TimeUT.logwithTimeStr = logwithTimeStr;
     /**
      * 获取当前时间的字符串描述
      * @param {时间格式} formatStr

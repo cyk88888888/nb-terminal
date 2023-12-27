@@ -20,7 +20,7 @@ var UT;
         function deleteFolder(path) {
             if (fs_1.default.existsSync(path)) {
                 fs_1.default.readdirSync(path).forEach(function (file) {
-                    var curPath = path + "/" + file;
+                    let curPath = path + "/" + file;
                     if (fs_1.default.statSync(curPath).isDirectory()) { // recurse
                         deleteFolder(curPath);
                     }

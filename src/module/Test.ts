@@ -35,71 +35,31 @@ export class Test {
 
     private async test2() {
         TimeUT.consoleStartCli('push');
-        async function promise_pull(){
-            return new Promise<string>(function (resolve, reject) {
-                exec('git pull', { cwd: process.cwd(), encoding: 'utf8' }, (err: ExecException, stdout: string, stderr: string) => {
+        function dealGit(cli: string, cwd: string, succMsg: string, failMsg: string) {
+            return new Promise<boolean>(function (resolve, reject) {
+                exec(cli, { cwd: cwd }, (err: ExecException, stdout: string, stderr: string) => {
                     if (err) {
-                        UT.logRed(err);
-                        UT.logRed('stderr:' + stderr);
+                        if(failMsg) TimeUT.logwithTimeStr(UT.logRed(failMsg + err));
                         reject();
                     } else {
-                        console.log(stdout);
-                        resolve('');
-                    }
-                });
-            });
-        } 
-
-        async function promise_add(){
-            return new Promise<string>(function (resolve, reject) {
-                exec('git add .', { cwd: process.cwd(), encoding: 'utf8' }, (err: ExecException, stdout: string, stderr: string) => {
-                    if (err) {
-                        UT.logRed(err);
-                        UT.logRed('stderr:' + stderr);
-                        reject();
-                    } else {
-                        console.log(stdout);
-                        resolve('');
+                        if (succMsg) TimeUT.logwithTimeStr(succMsg + stdout);
+                        if(cli == 'git status') {
+                            let isNeedCommit = stdout.includes("Changes");
+                            resolve(isNeedCommit);
+                        }else{
+                            resolve(false);
+                        }
                     }
                 });
             });
         }
 
-        async function promise_commit(){
-            return new Promise<string>(function (resolve, reject) {
-                exec('git commit -m "提交代码"', { cwd: process.cwd(), encoding: 'utf8' }, (err: ExecException, stdout: string, stderr: string) => {
-                    if (err) {
-                        UT.logRed(err);
-                        UT.logRed('stderr:' + stderr);
-                        reject();
-                    } else {
-                        console.log(stdout);
-                        resolve('');
-                    }
-                });
-            });
+        await dealGit('git add .', process.cwd(),'','');
+        let isNeedCommit = await dealGit('git status', process.cwd(),'','');
+        if(isNeedCommit){
+            await dealGit('git commit -m "提交代码"', process.cwd(),'','');
+            await dealGit('git push', process.cwd(),'','');
         }
-
-        async function promise_push(){
-            return new Promise<string>(function (resolve, reject) {
-                exec('git push', { cwd: process.cwd(), encoding: 'utf8' }, (err: ExecException, stdout: string, stderr: string) => {
-                    if (err) {
-                        UT.logRed(err);
-                        UT.logRed('stderr:' + stderr);
-                        reject();
-                    } else {
-                        console.log(stdout);
-                        resolve('');
-                    }
-                });
-            });
-        }
-
-        await promise_pull();
-        await promise_add();
-        await promise_commit();
-        await promise_push();
-
         TimeUT.consoleEndCli('push');
     }
 

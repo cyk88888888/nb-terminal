@@ -14,7 +14,7 @@ export namespace UT {
         function deleteFolder(path) {
             if (fs.existsSync(path)) {
                 fs.readdirSync(path).forEach(function (file) {
-                    var curPath = path + "/" + file;
+                    let curPath = path + "/" + file;
                     if (fs.statSync(curPath).isDirectory()) { // recurse
                         deleteFolder(curPath);
                     } else { // delete file

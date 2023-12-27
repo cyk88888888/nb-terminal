@@ -32,70 +32,34 @@ class Test {
     }
     async test2() {
         TimeUT_1.TimeUT.consoleStartCli('push');
-        async function promise_pull() {
+        function dealGit(cli, cwd, succMsg, failMsg) {
             return new Promise(function (resolve, reject) {
-                (0, child_process_1.exec)('git pull', { cwd: process.cwd(), encoding: 'utf8' }, (err, stdout, stderr) => {
+                (0, child_process_1.exec)(cli, { cwd: cwd }, (err, stdout, stderr) => {
                     if (err) {
-                        UT_1.UT.logRed(err);
-                        UT_1.UT.logRed('stderr:' + stderr);
+                        if (failMsg)
+                            TimeUT_1.TimeUT.logwithTimeStr(UT_1.UT.logRed(failMsg + err));
                         reject();
                     }
                     else {
-                        console.log(stdout);
-                        resolve('');
+                        if (succMsg)
+                            TimeUT_1.TimeUT.logwithTimeStr(succMsg + stdout);
+                        if (cli == 'git status') {
+                            let isNeedCommit = stdout.includes("Changes");
+                            resolve(isNeedCommit);
+                        }
+                        else {
+                            resolve(false);
+                        }
                     }
                 });
             });
         }
-        async function promise_add() {
-            return new Promise(function (resolve, reject) {
-                (0, child_process_1.exec)('git add .', { cwd: process.cwd(), encoding: 'utf8' }, (err, stdout, stderr) => {
-                    if (err) {
-                        UT_1.UT.logRed(err);
-                        UT_1.UT.logRed('stderr:' + stderr);
-                        reject();
-                    }
-                    else {
-                        console.log(stdout);
-                        resolve('');
-                    }
-                });
-            });
+        await dealGit('git add .', process.cwd(), '', '');
+        let isNeedCommit = await dealGit('git status', process.cwd(), '', '');
+        if (isNeedCommit) {
+            await dealGit('git commit -m "提交代码"', process.cwd(), '', '');
+            await dealGit('git push', process.cwd(), '', '');
         }
-        async function promise_commit() {
-            return new Promise(function (resolve, reject) {
-                (0, child_process_1.exec)('git commit -m "提交代码"', { cwd: process.cwd(), encoding: 'utf8' }, (err, stdout, stderr) => {
-                    if (err) {
-                        UT_1.UT.logRed(err);
-                        UT_1.UT.logRed('stderr:' + stderr);
-                        reject();
-                    }
-                    else {
-                        console.log(stdout);
-                        resolve('');
-                    }
-                });
-            });
-        }
-        async function promise_push() {
-            return new Promise(function (resolve, reject) {
-                (0, child_process_1.exec)('git push', { cwd: process.cwd(), encoding: 'utf8' }, (err, stdout, stderr) => {
-                    if (err) {
-                        UT_1.UT.logRed(err);
-                        UT_1.UT.logRed('stderr:' + stderr);
-                        reject();
-                    }
-                    else {
-                        console.log(stdout);
-                        resolve('');
-                    }
-                });
-            });
-        }
-        await promise_pull();
-        await promise_add();
-        await promise_commit();
-        await promise_push();
         TimeUT_1.TimeUT.consoleEndCli('push');
     }
 }
