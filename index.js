@@ -1,2 +1,2 @@
 #!/usr/bin/env node
-const app = require('./bin/app.js');
+const app = require('./out/bin/app.js');

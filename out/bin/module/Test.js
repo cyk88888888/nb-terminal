@@ -11,14 +11,15 @@ const UT_1 = require("./lib/UT");
  */
 class Test {
     constructor() {
-        // this.test();
+        this.test();
         // this.test1();
-        this.test2();
+        // this.test2();
     }
     test() {
-        TimeUT_1.TimeUT.consoleStartCli('test');
-        UT_1.UT.logRed("哈哈哈哈");
-        TimeUT_1.TimeUT.consoleEndCli('test');
+        let self = this;
+        setTimeout(function () {
+            console.log(typeof self);
+        }, 200);
     }
     test1() {
         let promise = new Promise(function (resolve, reject) {

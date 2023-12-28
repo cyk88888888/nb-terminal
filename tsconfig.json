@@ -2,10 +2,12 @@
   "compilerOptions": {
     "target": "ES2020",
     "module": "CommonJS",
-    "outDir": "bin",
+    "outDir": "out/bin",
     "rootDir": "src",
     "esModuleInterop": true,
     "strict": false,
+    "declaration": true,
+    "declarationDir": "out/type",
     // "sourceMap": true
   },
   "include": ["src/**/*"],

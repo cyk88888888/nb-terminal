@@ -14,7 +14,7 @@ import { AddressInfo } from 'net';
 export class Express {
     private app: any;
     private port: number;
-    private server: http.Server|https.Server;
+    private server: http.Server | https.Server;
     constructor(dirUrl: string, isHttps?: boolean) {
         let self = this;
         self.app = express();
@@ -22,7 +22,7 @@ export class Express {
         console.log('http%s服务器的作用目录路径: %s', isHttps ? "s" : '', httpUrl);
         self.app.use(express.static(httpUrl));
         self.port = 3000;
-        this.createServer(this.port, isHttps);
+        this.createServer(this.port, isHttps); 
     }
 
     private createServer(port: number, isHttps?: boolean) {
@@ -67,7 +67,7 @@ export class Express {
     }
 
     /** 获取本机ip*/
-    private getIp() {
+    private getIp(): string {
         let needHost = ''
         try {
             // 获得网络接口列表

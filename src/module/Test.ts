@@ -9,15 +9,16 @@ import { UT } from "./lib/UT";
  */
 export class Test {
     constructor() {
-        // this.test();
+        this.test();
         // this.test1();
-        this.test2();
+        // this.test2();
     }
 
     private test() {
-        TimeUT.consoleStartCli('test');
-        UT.logRed("哈哈哈哈");
-        TimeUT.consoleEndCli('test');
+        let self = this;
+        setTimeout(function(){
+            console.log(typeof self);
+        }, 200);
     }
 
     private test1() {
