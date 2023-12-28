@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @date 2023-12-14 09:52:14
  */
 const commander_1 = require("commander");
-const Express_1 = require("./module/Express");
+const Express_1 = require("./module/nb-http/Express");
 const Test_1 = require("./module/Test");
 const program = new commander_1.Command();
 program

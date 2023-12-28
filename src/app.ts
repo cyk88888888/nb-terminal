@@ -4,7 +4,7 @@
  * @date 2023-12-14 09:52:14
  */
 import { Command } from "commander"
-import { Express } from "./module/Express"
+import { Express } from "./module/nb-http/Express"
 import { Test } from "./module/Test"
 const program = new Command()
 program

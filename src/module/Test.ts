@@ -1,7 +1,6 @@
 import { ExecException, exec } from "child_process";
-import { TimeUT } from "./lib/TimeUT";
-import { UT } from "./lib/UT";
-
+import { TimeUT } from "../framework/nb-base/TimeUT";
+import { UT } from "../framework/nb-base/UT";
 /** 
  * @descripttion 测试脚本
  * @author cyk
@@ -13,11 +12,10 @@ export class Test {
         // this.test1();
         // this.test2();
     }
-
     private test() {
         let self = this;
-        setTimeout(function(){
-            console.log(typeof self);
+        setTimeout(function () {
+            console.log(this);
         }, 200);
     }
 
@@ -40,14 +38,14 @@ export class Test {
             return new Promise<boolean>(function (resolve, reject) {
                 exec(cli, { cwd: cwd }, (err: ExecException, stdout: string, stderr: string) => {
                     if (err) {
-                        if(failMsg) TimeUT.logwithTimeStr(UT.logRed(failMsg + err));
+                        if (failMsg) TimeUT.logwithTimeStr(UT.logRed(failMsg + err));
                         reject();
                     } else {
                         if (succMsg) TimeUT.logwithTimeStr(succMsg + stdout);
-                        if(cli == 'git status') {
+                        if (cli == 'git status') {
                             let isNeedCommit = stdout.includes("Changes");
                             resolve(isNeedCommit);
-                        }else{
+                        } else {
                             resolve(false);
                         }
                     }
@@ -55,11 +53,11 @@ export class Test {
             });
         }
 
-        await dealGit('git add .', process.cwd(),'','');
-        let isNeedCommit = await dealGit('git status', process.cwd(),'','');
-        if(isNeedCommit){
-            await dealGit('git commit -m "提交代码"', process.cwd(),'','');
-            await dealGit('git push', process.cwd(),'','');
+        await dealGit('git add .', process.cwd(), '', '');
+        let isNeedCommit = await dealGit('git status', process.cwd(), '', '');
+        if (isNeedCommit) {
+            await dealGit('git commit -m "提交代码"', process.cwd(), '', '');
+            await dealGit('git push', process.cwd(), '', '');
         }
         TimeUT.consoleEndCli('push');
     }

@@ -2,8 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Test = void 0;
 const child_process_1 = require("child_process");
-const TimeUT_1 = require("./lib/TimeUT");
-const UT_1 = require("./lib/UT");
+const TimeUT_1 = require("../framework/nb-base/TimeUT");
+const UT_1 = require("../framework/nb-base/UT");
 /**
  * @descripttion 测试脚本
  * @author cyk
@@ -18,7 +18,7 @@ class Test {
     test() {
         let self = this;
         setTimeout(function () {
-            console.log(typeof self);
+            console.log(this);
         }, 200);
     }
     test1() {

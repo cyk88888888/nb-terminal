@@ -29,7 +29,7 @@ class Express {
     createServer(port, isHttps) {
         let self = this;
         if (isHttps) {
-            let sslUrl = path_1.default.join(__dirname.split("bin")[0], "ssl");
+            let sslUrl = path_1.default.join(__dirname.split("out")[0], "ssl");
             const options = {
                 key: fs_1.default.readFileSync(path_1.default.join(sslUrl, 'server.key')),
                 cert: fs_1.default.readFileSync(path_1.default.join(sslUrl, 'server.crt')),
