@@ -16,10 +16,7 @@ class Test {
         // this.test2();
     }
     test() {
-        let self = this;
-        setTimeout(function () {
-            console.log(this);
-        }, 200);
+        UT_1.UT.logRed('123456');
     }
     test1() {
         let promise = new Promise(function (resolve, reject) {
@@ -38,7 +35,7 @@ class Test {
                 (0, child_process_1.exec)(cli, { cwd: cwd }, (err, stdout, stderr) => {
                     if (err) {
                         if (failMsg)
-                            TimeUT_1.TimeUT.logwithTimeStr(UT_1.UT.logRed(failMsg + err));
+                            TimeUT_1.TimeUT.logwithTimeStr(UT_1.UT.getRedStr(failMsg + JSON.stringify(err)));
                         reject();
                     }
                     else {

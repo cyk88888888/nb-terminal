@@ -11,13 +11,7 @@ export declare namespace UT {
      * 输出红色字体的log
      * 样式详见 https://www.cnblogs.com/taohuaya/p/13948401.html
      */
-    function logRed(msg: string): void;
-    /**
-     * 获得红色样式的文本内容
-     * @param msg
-     * @returns
-     */
-    function getRedStr(msg: string): string;
+    function logRed(msg: any): void;
     /**
      * 填充字符串(占位符为%s)
      * @param {*} msg

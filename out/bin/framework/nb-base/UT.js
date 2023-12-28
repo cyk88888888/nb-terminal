@@ -63,9 +63,18 @@ var UT;
      * 样式详见 https://www.cnblogs.com/taohuaya/p/13948401.html
      */
     function logRed(msg) {
-        console.log(`\x1b[31m${msg}\x1b[0m`);
+        console.log(getRedStr(msg));
     }
     UT.logRed = logRed;
+    /**
+     * 获得红色样式的文本内容
+     * @param msg
+     * @returns
+     */
+    function getRedStr(msg) {
+        return `\x1b[31m${msg}\x1b[0m`;
+    }
+    UT.getRedStr = getRedStr;
     /**
      * 填充字符串(占位符为%s)
      * @param {*} msg

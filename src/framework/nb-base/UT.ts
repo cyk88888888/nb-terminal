@@ -52,8 +52,17 @@ export namespace UT {
      * 输出红色字体的log
      * 样式详见 https://www.cnblogs.com/taohuaya/p/13948401.html
      */
-    export function logRed(msg) {
-        console.log(`\x1b[31m${msg}\x1b[0m`);
+    export function logRed(msg:string) {
+        console.log(getRedStr(msg));
+    }
+
+    /**
+     * 获得红色样式的文本内容
+     * @param msg 
+     * @returns 
+     */
+    export function getRedStr(msg:string){
+        return `\x1b[31m${msg}\x1b[0m`;
     }
 
     /**

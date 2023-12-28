@@ -17,6 +17,9 @@ const os_1 = __importDefault(require("os"));
  * @date 2023-12-14 09:52:14
  */
 class Express {
+    app;
+    port;
+    server;
     constructor(dirUrl, isHttps) {
         let self = this;
         self.app = (0, express_1.default)();

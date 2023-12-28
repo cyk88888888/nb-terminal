@@ -13,10 +13,7 @@ export class Test {
         // this.test2();
     }
     private test() {
-        let self = this;
-        setTimeout(function () {
-            console.log(this);
-        }, 200);
+        UT.logRed('123456');
     }
 
     private test1() {
@@ -38,7 +35,7 @@ export class Test {
             return new Promise<boolean>(function (resolve, reject) {
                 exec(cli, { cwd: cwd }, (err: ExecException, stdout: string, stderr: string) => {
                     if (err) {
-                        if (failMsg) TimeUT.logwithTimeStr(UT.logRed(failMsg + err));
+                        if (failMsg) TimeUT.logwithTimeStr(UT.getRedStr(failMsg + JSON.stringify(err)));
                         reject();
                     } else {
                         if (succMsg) TimeUT.logwithTimeStr(succMsg + stdout);

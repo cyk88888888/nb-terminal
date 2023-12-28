@@ -7,7 +7,7 @@ export declare namespace TimeUT {
      * @returns
     */
     function getDateDiff(sDate: Date, eDate: Date, diffType?: string): number;
-    function consoleStartCli(cli: string): void;
-    function consoleEndCli(cli: string): void;
-    function logwithTimeStr(msg: string): void;
+    function consoleStartCli(cli: any): void;
+    function consoleEndCli(cli: any): void;
+    function logwithTimeStr(msg: any): void;
 }

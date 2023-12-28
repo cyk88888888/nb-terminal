@@ -48,16 +48,16 @@ export namespace TimeUT {
     }
 
     let stDate: Date;
-    export function consoleStartCli(cli) {
+    export function consoleStartCli(cli:string) {
         stDate = curDate();
         logwithTimeStr(UT.formatStr(">>>>>>>>开始执行命令【%s】(%s)...<<<<<<<<", cli, process.cwd()));
     }
 
-    export function consoleEndCli(cli) {
+    export function consoleEndCli(cli:string) {
         logwithTimeStr(UT.formatStr('命令【%s】执行完毕, 共耗时%s秒!', cli, getDateDiff(stDate, curDate()) + ''))
     }
 
-    export function logwithTimeStr(msg) {
+    export function logwithTimeStr(msg:string) {
         console.log("%s: %s", getCurTimeStr(), msg);
     }
 

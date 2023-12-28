@@ -1,14 +1,19 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
+    "target": "ES2022",
     "module": "CommonJS",
     "outDir": "out/bin",
     "rootDir": "src",
+    "moduleResolution": "node",
+    // "outFile": "./app.js",
     "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "isolatedModules": true,
+    "forceConsistentCasingInFileNames": true,
     "strict": false,
     "declaration": true,
     "declarationDir": "out/type",
-    // "sourceMap": true
+    "listEmittedFiles": true,
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules"]
